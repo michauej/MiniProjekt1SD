@@ -127,7 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayList.cpp" />
+    <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="MiniProjekt1SD.cpp" />
+    <ClCompile Include="SinglyLinkedList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArrayList.h" />
+    <ClInclude Include="DoublyLinkedList.h" />
+    <ClInclude Include="IList.h" />
+    <ClInclude Include="SinglyLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
