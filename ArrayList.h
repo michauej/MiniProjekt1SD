@@ -41,6 +41,15 @@ public:
 	// Usuwa element na okreœlonym indeksie
 	void removeAtIndex(int index);
 
+	// Wyszukuje element 
+	bool search(T value);
+
+	// Zwraca liczbê elementów
+	int getSize() { return currentSize; }
+
+	// Wyœwietla zawartoœæ tablicy (do debugowania)
+	void display();
+
 };
 
 
