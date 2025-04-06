@@ -20,6 +20,26 @@ public:
 	ArrayList() : capacity(10), current_size(0) {
 		array = new T[capacity];
 	}
+	~ArrayList() {//destruktor
+		delete[] array;
+	}
+	// Dodaje element na pocz¹tek tablicy
+	void addAtStart(T value);
+
+	// Dodaje element na koniec tablicy
+	void addAtEnd(T value);
+
+	// Dodaje element na okreœlony indeks
+	void addAtIndex(int index, T value);
+
+	// Usuwa pierwszy element
+	void removeAtStart();
+
+	// Usuwa ostatni element
+	void removeAtEnd();
+
+	// Usuwa element na okreœlonym indeksie
+	void removeAtIndex(int index);
 
 };
 
