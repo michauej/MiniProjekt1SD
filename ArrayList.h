@@ -1,55 +1,96 @@
 #pragma once
 #include "IList.h"
-#incude<iostream>
+#include <iostream>
 
 template <typename T>
-class ArrayList:public IList<T>
-{
+class ArrayList : public IList<T> {
 private:
-	T* array;
-	int capacity;
-	int current_size;
-	void resize() {
-		capacity *= 2;
-		T* newArray = new T[capacity];
-		for (int i = 0; i < current_size; i++); {
-			newArray[i] = array[i];
-		}
-	}
+    T* array;
+    int capacity;
+    int currentSize;
+
+    void resize() {
+        capacity *= 2;
+        T* newArray = new T[capacity];
+        for (int i = 0; i < currentSize; i++) {
+            newArray[i] = array[i];
+        }
+        delete[] array;
+        array = newArray;
+    }
+
 public:
-	ArrayList() : capacity(10), current_size(0) {
-		array = new T[capacity];
-	}
-	~ArrayList() {//destruktor
-		delete[] array;
-	}
-	// Dodaje element na pocz¹tek tablicy
-	void addAtStart(T value);
+    ArrayList() : capacity(10), currentSize(0) {
+        array = new T[capacity];
+    }
 
-	// Dodaje element na koniec tablicy
-	void addAtEnd(T value);
+    ~ArrayList() {
+        delete[] array;
+    }
 
-	// Dodaje element na okreœlony indeks
-	void addAtIndex(int index, T value);
+    void addAtStart(T value) override {
+        if (currentSize == capacity) resize();
+        for (int i = currentSize; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+        array[0] = value;
+        currentSize++;
+    }
 
-	// Usuwa pierwszy element
-	void removeAtStart();
+    void addAtEnd(T value) override {
+        if (currentSize == capacity) resize();
+        array[currentSize++] = value;
+    }
 
-	// Usuwa ostatni element
-	void removeAtEnd();
+    void addAtIndex(int index, T value) override {
+        if (index < 0 || index > currentSize) {
+            std::cerr << "Invalid index!\n";
+            return;
+        }
+        if (currentSize == capacity) resize();
+        for (int i = currentSize; i > index; i--) {
+            array[i] = array[i - 1];
+        }
+        array[index] = value;
+        currentSize++;
+    }
 
-	// Usuwa element na okreœlonym indeksie
-	void removeAtIndex(int index);
+    void removeAtStart() override {
+        if (currentSize == 0) return;
+        for (int i = 0; i < currentSize - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        currentSize--;
+    }
 
-	// Wyszukuje element 
-	bool search(T value);
+    void removeAtEnd() override {
+        if (currentSize > 0) currentSize--;
+    }
 
-	// Zwraca liczbê elementów
-	int getSize() { return currentSize; }
+    void removeAtIndex(int index) override {
+        if (index < 0 || index >= currentSize) return;
+        for (int i = index; i < currentSize - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        currentSize--;
+    }
 
-	// Wyœwietla zawartoœæ tablicy (do debugowania)
-	void display();
+    bool search(T value) override {
+        for (int i = 0; i < currentSize; i++) {
+            if (array[i] == value) return true;
+        }
+        return false;
+    }
 
+    int getSize() override {
+        return currentSize;
+    }
+
+    void display() override {
+        std::cout << "[ ";
+        for (int i = 0; i < currentSize; i++) {
+            std::cout << array[i] << " ";
+        }
+        std::cout << "]\n";
+    }
 };
-
-
