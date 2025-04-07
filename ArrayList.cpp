@@ -81,6 +81,8 @@ void ArrayList::display(){
 }
 
 void ArrayList::import(string fileName) {
+    delete[] array;
+    array = new int[capacity];
     std::ifstream file(fileName);
     if (!file) {
         std::cerr << "Nie można otworzyć pliku: " << fileName << "\n";

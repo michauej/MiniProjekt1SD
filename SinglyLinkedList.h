@@ -139,6 +139,16 @@ public:
     }
 
     void import(string fileName) {
+        // Czyszczenie istniejącej listy
+        Node* current = head;
+        while (current) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+        head = tail = nullptr;
+        size = 0;
+
         std::ifstream file(fileName);
         if (!file) {
             std::cerr << "Nie można otworzyć pliku: " << fileName << "\n";
@@ -146,7 +156,6 @@ public:
         }
 
         int value;
-        size = 0; // resetujemy dane
 
         while (file >> value) {
             addAtEnd(value);
@@ -155,4 +164,5 @@ public:
         file.close();
         //std::cout << "Import z pliku zakończony.\n";
     }
+
 };

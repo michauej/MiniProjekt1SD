@@ -37,31 +37,36 @@ void test(IList& list1, IList& list2, IList& list3) {
     int x = 5000;
     string name = "Text";
     while (x < 100000) {
-        generate8sets(name, x);
         long long totalDurationNs1 = 0;
         long long totalDurationNs2 = 0;
         long long totalDurationNs3 = 0;
         for (int j = 0; j < 8; j++) {
+            list1.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+            list2.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+            list3.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+
             for (int i = 0; i < 100; ++i) {
-                list1.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+                //list1.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
                 auto start1 = chrono::high_resolution_clock::now();
-                list1.addAtEnd(2); // dodajemy element do tablicy
+                list1.addAtStart(134); // dodajemy element do tablicy
                 auto end1 = chrono::high_resolution_clock::now();
+                list1.removeAtStart();
                 auto duration1 = chrono::duration_cast<chrono::nanoseconds>(end1 - start1).count();
                 totalDurationNs1 += duration1;
-                list2.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+                //list2.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
                 auto start2 = chrono::high_resolution_clock::now();
-                list2.addAtEnd(2); // dodajemy element do tablicy
+                list2.addAtStart(134); // dodajemy element do tablicy
                 auto end2 = chrono::high_resolution_clock::now();
+                list2.removeAtStart();
                 auto duration2 = chrono::duration_cast<chrono::nanoseconds>(end2 - start2).count();
                 totalDurationNs2 += duration2;
-                list3.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+                //list3.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
                 auto start3 = chrono::high_resolution_clock::now();
-                list3.addAtEnd(2); // dodajemy element do tablicy
+                list3.addAtStart(134); // dodajemy element do tablicy
                 auto end3 = chrono::high_resolution_clock::now();
+                list3.removeAtStart();
                 auto duration3 = chrono::duration_cast<chrono::nanoseconds>(end3 - start3).count();
                 totalDurationNs3 += duration3;
-
             }
         }
         double averageDuration1 = static_cast<double>(totalDurationNs1) / 800;
