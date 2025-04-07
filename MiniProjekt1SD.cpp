@@ -6,6 +6,7 @@
 #include <fstream>
 #include <random>
 #include <chrono>
+
 using namespace std;
 
 void generateRandomIntsToFile(string name,int count) {
@@ -28,33 +29,53 @@ void generateRandomIntsToFile(string name,int count) {
 
 void generate8sets(string name, int count) {
     for (int i = 0; i < 8; i++) {
-        generateRandomIntsToFile(name+to_string(i)+".txt", 5000);
+        generateRandomIntsToFile(name+"_" + to_string(count)+"_"+to_string(i)+ ".txt", count);
     }
 }
 
-void test(IList& list) {
+void test(IList& list1, IList& list2, IList& list3) {
     int x = 5000;
-    generateRandomIntsToFile("Text.txt",x );
+    string name = "Text";
     while (x < 100000) {
-        long long totalDurationNs = 0;
-        for (int i = 0; i < 1000; ++i) {
-            list.import("Text.txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
-            auto start = chrono::high_resolution_clock::now();
-            list.addAtEnd(2); // dodajemy element do tablicy
-            auto end = chrono::high_resolution_clock::now();
-            auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start).count();
-            totalDurationNs += duration;
-        }
+        generate8sets(name, x);
+        long long totalDurationNs1 = 0;
+        long long totalDurationNs2 = 0;
+        long long totalDurationNs3 = 0;
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 100; ++i) {
+                list1.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+                auto start1 = chrono::high_resolution_clock::now();
+                list1.addAtEnd(2); // dodajemy element do tablicy
+                auto end1 = chrono::high_resolution_clock::now();
+                auto duration1 = chrono::duration_cast<chrono::nanoseconds>(end1 - start1).count();
+                totalDurationNs1 += duration1;
+                list2.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+                auto start2 = chrono::high_resolution_clock::now();
+                list2.addAtEnd(2); // dodajemy element do tablicy
+                auto end2 = chrono::high_resolution_clock::now();
+                auto duration2 = chrono::duration_cast<chrono::nanoseconds>(end2 - start2).count();
+                totalDurationNs2 += duration2;
+                list3.import(name + "_" + to_string(x) + "_" + to_string(j) + ".txt");//wczytujemy dane z pliku, aby znów działać na tym samym zestawie
+                auto start3 = chrono::high_resolution_clock::now();
+                list3.addAtEnd(2); // dodajemy element do tablicy
+                auto end3 = chrono::high_resolution_clock::now();
+                auto duration3 = chrono::duration_cast<chrono::nanoseconds>(end3 - start3).count();
+                totalDurationNs3 += duration3;
 
-        double averageDuration = static_cast<double>(totalDurationNs) / 1000;
-        cout << x << " " << averageDuration << endl;
+            }
+        }
+        double averageDuration1 = static_cast<double>(totalDurationNs1) / 800;
+        double averageDuration2 = static_cast<double>(totalDurationNs2) / 800;
+        double averageDuration3 = static_cast<double>(totalDurationNs3) / 800;
+        cout << x << " " << averageDuration1 << " " << averageDuration2 << " " << averageDuration3 << endl;
         x += 10000;
     }
 }
 int main(){
 	ArrayList a;
-    generate8sets("dane", 50);
-	//test(a);
+    SinglyLinkedList b;
+    DoublyLinkedList c;
+    test(a,b,c);
 	//SinglyLinkedList a;
 	//DoublyLinkedList a;
     /*

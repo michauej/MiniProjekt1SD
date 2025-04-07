@@ -1,6 +1,10 @@
-#pragma once
+﻿#pragma once
 #include "IList.h"
 #include <iostream>
+#include <fstream>
+
+using namespace std;
+
 
 class DoublyLinkedList : public IList{
 private:
@@ -136,5 +140,23 @@ public:
             current = current->next;
         }
         std::cout << "]\n";
+    }
+
+    void import(string fileName) {
+        std::ifstream file(fileName);
+        if (!file) {
+            std::cerr << "Nie można otworzyć pliku: " << fileName << "\n";
+            return;
+        }
+
+        int value;
+        size = 0; // resetujemy dane
+
+        while (file >> value) {
+            addAtEnd(value);
+        }
+
+        file.close();
+        //std::cout << "Import z pliku zakończony.\n";
     }
 };
