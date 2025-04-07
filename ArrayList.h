@@ -2,6 +2,8 @@
 #include "IList.h"
 #include <iostream>
 
+using namespace std;
+
 class ArrayList : public IList{
 private:
     int* array;
@@ -30,4 +32,5 @@ public:
     bool search(int value) override;
     int getSize() override;
     void display() override;
+    void import(string fileName) override;
 };

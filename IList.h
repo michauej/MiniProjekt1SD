@@ -1,5 +1,6 @@
 #pragma once
-
+#include<iostream>
+using namespace std;
 class IList {
 public:
     virtual void addAtStart(int value) = 0;
@@ -11,5 +12,6 @@ public:
     virtual bool search(int value) = 0;
     virtual int getSize() = 0;
     virtual void display() = 0;
+    virtual void import(string fileName) = 0;
     virtual ~IList() {}
 };

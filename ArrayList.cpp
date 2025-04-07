@@ -1,4 +1,7 @@
-#include "ArrayList.h"
+﻿#include "ArrayList.h"
+#include <iostream>
+#include <fstream>
+
 ArrayList::ArrayList(int cap) : currentSize(0), capacity(cap) {
     array = new int[capacity];
 }
@@ -75,4 +78,22 @@ void ArrayList::display(){
         std::cout << array[i] << " ";
     }
     std::cout << "]\n";
+}
+
+void ArrayList::import(string fileName) {
+    std::ifstream file(fileName);
+    if (!file) {
+        std::cerr << "Nie można otworzyć pliku: " << fileName << "\n";
+        return;
+    }
+
+    int value;
+    currentSize = 0; // resetujemy dane
+
+    while (file >> value) {
+        addAtEnd(value);
+    }
+
+    file.close();
+    //std::cout << "Import z pliku zakończony.\n";
 }
