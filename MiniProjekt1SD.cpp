@@ -5,6 +5,15 @@
 
 int main()
 {
-	std::cout << "Hello world";
-	return 0;
+	ArrayList a;
+	//SinglyLinkedList a;
+	//DoublyLinkedList a;
+	a.addAtEnd(5);
+	a.addAtStart(1);
+	a.addAtIndex(1, 3);
+	a.display();
+	a.removeAtStart();
+	a.display();
+	a.removeAtIndex(1);
+	a.display();
 }

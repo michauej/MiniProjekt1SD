@@ -2,13 +2,12 @@
 #include "IList.h"
 #include <iostream>
 
-template <typename T>
-class SinglyLinkedList : public IList<T> {
+class SinglyLinkedList : public IList{
 private:
     struct Node {
-        T data;
+        int data;
         Node* next;
-        Node(T val) : data(val), next(nullptr) {}
+        Node(int val) : data(val), next(nullptr) {}
     };
 
     Node* head;
@@ -27,7 +26,7 @@ public:
         }
     }
 
-    void addAtStart(T value) override {
+    void addAtStart(int value) override {
         Node* newNode = new Node(value);
         newNode->next = head;
         head = newNode;
@@ -35,7 +34,7 @@ public:
         size++;
     }
 
-    void addAtEnd(T value) override {
+    void addAtEnd(int value) override {
         Node* newNode = new Node(value);
         if (!tail) {
             head = tail = newNode;
@@ -47,7 +46,7 @@ public:
         size++;
     }
 
-    void addAtIndex(int index, T value) override {
+    void addAtIndex(int index, int value) override {
         if (index < 0 || index > size) return;
         if (index == 0) {
             addAtStart(value);
@@ -114,7 +113,7 @@ public:
         size--;
     }
 
-    bool search(T value) override {
+    bool search(int value) override {
         Node* current = head;
         while (current) {
             if (current->data == value) return true;
