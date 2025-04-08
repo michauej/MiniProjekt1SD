@@ -1,4 +1,4 @@
-#include "DoublyLinkedList.h"
+﻿#include "DoublyLinkedList.h"
 
 DoublyLinkedList::DoublyLinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
@@ -47,10 +47,22 @@ void DoublyLinkedList::addAtIndex(int index, int value) {
         addAtEnd(value);
         return;
     }
-    Node* current = head;
-    for (int i = 0; i < index; i++) {
-        current = current->next;
+
+    Node* current;
+    // Jeśli index jest bliżej początku
+    if (index <= size / 2) {
+        current = head;
+        for (int i = 0; i < index; i++) {
+            current = current->next;
+        }
     }
+    else {
+        current = tail;
+        for (int i = size - 1; i > index - 1; i--) {
+            current = current->prev;
+        }
+    }
+
     Node* newNode = new Node(value);
     newNode->prev = current->prev;
     newNode->next = current;
@@ -58,6 +70,7 @@ void DoublyLinkedList::addAtIndex(int index, int value) {
     current->prev = newNode;
     size++;
 }
+
 
 void DoublyLinkedList::removeAtStart() {
     if (!head) return;
@@ -81,23 +94,38 @@ void DoublyLinkedList::removeAtEnd() {
 
 void DoublyLinkedList::removeAtIndex(int index) {
     if (index < 0 || index >= size) return;
+
     if (index == 0) {
         removeAtStart();
         return;
     }
+
     if (index == size - 1) {
         removeAtEnd();
         return;
     }
-    Node* current = head;
-    for (int i = 0; i < index; i++) {
-        current = current->next;
+
+    Node* current;
+    // Wybierz kierunek iteracji
+    if (index <= size / 2) {
+        current = head;
+        for (int i = 0; i < index; i++) {
+            current = current->next;
+        }
     }
+    else {
+        current = tail;
+        for (int i = size - 1; i > index; i--) {
+            current = current->prev;
+        }
+    }
+
     current->prev->next = current->next;
     current->next->prev = current->prev;
     delete current;
     size--;
 }
+
 
 bool DoublyLinkedList::search(int value) {
     Node* current = head;
