@@ -97,5 +97,4 @@ void ArrayList::import(string fileName) {
     }
 
     file.close();
-    //std::cout << "Import z pliku zakończony.\n";
 }

@@ -87,19 +87,8 @@ int main(){
 	ArrayList a;
     SinglyLinkedList b;
     DoublyLinkedList c;
-    //test(a,b,c);
-	//SinglyLinkedList a;
-	//DoublyLinkedList a;
-    /*
-	a.addAtEnd(5);
-	a.addAtStart(1);
-	a.addAtIndex(1, 3);
-	a.display();
-	a.removeAtStart();
-	a.display();
-	a.removeAtIndex(1);
-	a.display();
-    */
+
+    //MENU
     cout << "--- Wybierz strukturę danych ---\n";
     cout << "1. ArrayList\n";
     cout << "2. SinglyLinkedList\n";
@@ -116,4 +105,18 @@ int main(){
         cout << "Nieprawidłowy wybór. Kończę program.\n";
         return 1;
     }
+//test(a,b,c);
+//SinglyLinkedList a;
+//DoublyLinkedList a;
+/*
+a.addAtEnd(5);
+a.addAtStart(1);
+a.addAtIndex(1, 3);
+a.display();
+a.removeAtStart();
+a.display();
+a.removeAtIndex(1);
+a.display();
+*/
+
 }

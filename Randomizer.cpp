@@ -23,6 +23,7 @@ void generateRandomIntsToFile(string name, int count) {
     file.close();
 }
 
+//gerneruje 8 plików o danym rozmiarze i nazwie
 void generate8sets(string name, int count) {
     for (int i = 0; i < 8; ++i) {
         generateRandomIntsToFile(name + "_" + to_string(count) + "_" + to_string(i) + ".txt", count);

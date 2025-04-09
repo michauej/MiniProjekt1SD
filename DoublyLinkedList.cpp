@@ -49,7 +49,7 @@ void DoublyLinkedList::addAtIndex(int index, int value) {
     }
 
     Node* current;
-    // Jeśli index jest bliżej początku
+    // Jeśli index jest bliżej początku to zaczynamy od początku, jeżeli nie to od tyłu
     if (index <= size / 2) {
         current = head;
         for (int i = 0; i < index; i++) {
@@ -106,7 +106,7 @@ void DoublyLinkedList::removeAtIndex(int index) {
     }
 
     Node* current;
-    // Wybierz kierunek iteracji
+    // Jeśli index jest bliżej początku to zaczynamy od początku, jeżeli nie to od tyłu 
     if (index <= size / 2) {
         current = head;
         for (int i = 0; i < index; i++) {
